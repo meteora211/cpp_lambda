@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(cpp_cheatsheet)
+project(cpp_lambda)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
@@ -23,4 +23,6 @@ if(NOT range-v3_POPULATED)
   target_include_directories(range-v3 SYSTEM INTERFACE $<BUILD_INTERFACE:${range-v3_SOURCE_DIR}/include>)
 endif()
 
+include_directories(${PROJECT_SOURCE_DIR}/common)
 add_subdirectory(chpt1)
+add_subdirectory(chpt2)
