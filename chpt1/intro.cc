@@ -65,7 +65,7 @@ vector<int> count_lines_in_files_declarative(const vector<string> &files) {
 
 int main() {
   auto cur_path = filesystem::current_path();
-  auto file_name = "chp1/test_in_file0";
+  auto file_name = "chpt1/test_in_file0";
   auto file_path = cur_path / file_name;
   cout << count_lines_in_files_imperative({file_path, file_path}) << endl;
   cout << count_lines_in_files_declarative({file_path, file_path}) << endl;

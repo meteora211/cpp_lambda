@@ -23,4 +23,4 @@ if(NOT range-v3_POPULATED)
   target_include_directories(range-v3 SYSTEM INTERFACE $<BUILD_INTERFACE:${range-v3_SOURCE_DIR}/include>)
 endif()
 
-add_subdirectory(chp1)
+add_subdirectory(chpt1)
