@@ -1,10 +1,19 @@
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <range/v3/all.hpp>
 #include <string>
 #include <vector>
+// NOTE: some features in std::ranges requires c++23. Use range-v3 instead.
+// #include <ranges>
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::ifstream;
+using std::string;
+using std::vector;
+namespace filesystem = std::filesystem;
 
 // helper function
 auto &operator<<(auto &out, const vector<int> &v) {
@@ -30,25 +39,28 @@ vector<int> count_lines_in_files_imperative(const vector<string> &files) {
   return results;
 }
 
-int count_lines(const string& file) {
+int count_lines(const string &file) {
   ifstream in(file);
-  return std::count(
-    std::istreambuf_iterator<char>(in),
-    std::istreambuf_iterator<char>(),
-    '\n'
-  );
+  return std::count(std::istreambuf_iterator<char>(in),
+                    std::istreambuf_iterator<char>(), '\n');
 }
 
 vector<int> count_lines_in_files_declarative(const vector<string> &files) {
   vector<int> results(files.size());
-  string line;
+  // option-1: for-loop
   // for (const string &file : files) {
   //   results.push_back(count_lines(file));
   // }
-  transform(files.cbegin(), files.cend(),
-            results.begin(),
-            count_lines);
-  return results;
+
+  // option-2: std transform
+  // transform(files.cbegin(), files.cend(),
+  //           results.begin(),
+  //           count_lines);
+  // return results;
+
+  // option-3: ranges
+  return files | ranges::views::transform(count_lines) |
+         ranges::to<vector<int>>();
 }
 
 int main() {

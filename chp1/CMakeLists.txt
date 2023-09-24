@@ -8,6 +8,9 @@ foreach(source_file ${SOURCE_FILES})
       CXX_STANDARD_REQUIRED YES
       CXX_EXTENSIONS NO
   )
+  if (${source_file} MATCHES "intro.cc")
+    target_link_libraries(${executable_name} PRIVATE range-v3)
+  endif()
   target_compile_options(${executable_name} PRIVATE -O3 -Wall -fno-elide-constructors)
   install(TARGETS ${executable_name} DESTINATION ${INSTALL_BIN_DIR})
 endforeach()
