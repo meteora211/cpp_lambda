@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <string>
 #include <vector>
-#include <numeric>
 
 #include "Person.h"
 
@@ -65,16 +65,15 @@ std::vector<std::string> name_for_tco(const std::vector<Person> &people,
 template <typename FilterFunction>
 std::vector<std::string> name_for_reduce(const std::vector<Person> &people,
                                          FilterFunction filter) {
-  auto append_name_if = [&](std::vector<std::string> pre_collected, const Person& p) -> std::vector<std::string> {
+  auto append_name_if = [&](std::vector<std::string> pre_collected,
+                            const Person &p) -> std::vector<std::string> {
     if (filter(p)) {
       pre_collected.push_back(get_person_name(p));
     }
     return pre_collected;
   };
-  return std::accumulate(people.cbegin(),
-                         people.cend(),
-                         std::vector<std::string>{},
-                         append_name_if);
+  return std::accumulate(people.cbegin(), people.cend(),
+                         std::vector<std::string>{}, append_name_if);
 }
 
 int main() {
