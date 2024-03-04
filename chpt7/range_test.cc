@@ -1,5 +1,7 @@
 #include <vector>
 #include <range/v3/all.hpp>
+#include <range/v3/action/sort.hpp>
+#include <range/v3/action/unique.hpp>
 #include <Person.h>
 #include <string>
 
@@ -20,6 +22,14 @@ int main() {
   std::vector<std::string> names = people | ranges::views::filter(is_female) | ranges::views::transform(name) | ranges::to<std::vector<std::string>>();
 
   for (auto&& n: names) {
+    std::cout << n << std::endl;
+  }
+
+  // sort need rvalue
+  std::vector<std::string> sorted = std::move(names) | ranges::actions::sort | ranges::actions::unique | ranges::to<std::vector<std::string>>();
+  // std::vector<std::string> sorted = people | ranges::views::transform(name) | ranges::actions::sort | ranges::actions::unique | ranges::to<std::vector<std::string>>();
+
+  for (auto&& n: sorted) {
     std::cout << n << std::endl;
   }
 
